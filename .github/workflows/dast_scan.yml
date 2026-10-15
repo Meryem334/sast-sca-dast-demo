@@ -21,7 +21,7 @@ jobs:
 
       # Run the built container and map a port to the host
       - name: Run Flask Docker container
-        run: docker run -d --name flask-app-container -p 5000:5000 --network zap-network my-vulnerable-flask-app
+        run: docker run -d --name flask-app-container -p 5000:5000 -e SECRET_KEY=ci-test-key --network zap-network my-vulnerable-flask-app
 
       # Wait for the app to start (sleep is simple, a healthcheck loop is better)
       - name: Wait for app to start
