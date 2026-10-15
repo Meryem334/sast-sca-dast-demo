@@ -11,9 +11,15 @@ ALLOWED = {"date": ["date"], "uptime": ["uptime"]}  # liste blanche de commandes
 
 @app.after_request
 def security_headers(resp):
-    resp.headers["Content-Security-Policy"] = "default-src 'self'"
+    resp.headers["Content-Security-Policy"] = (
+        "default-src 'self'; frame-ancestors 'none'; form-action 'self'"
+    )
     resp.headers["X-Frame-Options"] = "DENY"
     resp.headers["X-Content-Type-Options"] = "nosniff"
+    resp.headers["Permissions-Policy"] = "geolocation=(), camera=(), microphone=()"
+    resp.headers["Cross-Origin-Opener-Policy"] = "same-origin"
+    resp.headers["Cross-Origin-Embedder-Policy"] = "require-corp"
+    resp.headers["Cross-Origin-Resource-Policy"] = "same-origin"
     return resp
 
 
