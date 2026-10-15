@@ -42,4 +42,4 @@ def execute():
 
 if __name__ == '__main__':
     debug = os.environ.get("FLASK_DEBUG") == "1"
-    app.run(debug=debug, host='0.0.0.0')
+    app.run(debug=debug, host=os.environ.get("APP_HOST", "127.0.0.1"))
